@@ -71,6 +71,7 @@ function App() {
                                     )
                                 }
                             />
+                            <Route path='gmed-front' element={<Navigate to={'/login'} />} />
                             <Route path='login' element={<Login isAuth={isAuth} setIsAuth={setIsAuth} />} />
                             <Route path='registrar' element={<Registrar isAuth={isAuth} setIsAuth={setIsAuth} />} />
                             <Route path='sobre' element={<Sobre />} />
