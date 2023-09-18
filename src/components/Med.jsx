@@ -37,7 +37,7 @@ function Med({ item, ct, labs, pa, isAuth, setReload, setToast, isSmallScreen })
             )}
             <div className='ms-auto'></div>
             {item.quantidade < 1000 && <Badge bg='warning'>{isSmallScreen ? 'eb' : 'estoque baixo'}</Badge>}
-            {item.vencimento.slice(0, 4) === new Date().getFullYear() && (
+            {item.vencimento.slice(0, 4) === '2023' && (
                 <Badge bg='danger'>{isSmallScreen ? 'vp' : 'vencimento próximo'}</Badge>
             )}
             <ButtonGroup size='sm' aria-label='Basic example'>
