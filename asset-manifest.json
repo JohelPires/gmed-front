@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/gmed-front/static/css/main.01db5386.css",
-    "main.js": "/gmed-front/static/js/main.02e00bed.js",
+    "main.js": "/gmed-front/static/js/main.1d2edf95.js",
     "index.html": "/gmed-front/index.html",
     "main.01db5386.css.map": "/gmed-front/static/css/main.01db5386.css.map",
-    "main.02e00bed.js.map": "/gmed-front/static/js/main.02e00bed.js.map"
+    "main.1d2edf95.js.map": "/gmed-front/static/js/main.1d2edf95.js.map"
   },
   "entrypoints": [
     "static/css/main.01db5386.css",
-    "static/js/main.02e00bed.js"
+    "static/js/main.1d2edf95.js"
   ]
 }
