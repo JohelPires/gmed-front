@@ -14,7 +14,7 @@ function AddPAModal(props) {
     } = useForm({
         shouldUnregister: true,
         defaultValues: {
-            nome: props.editMode ? props.pa.nome : '',
+            nome: props.editmode ? props.pa.nome : '',
         },
     })
 
@@ -24,37 +24,37 @@ function AddPAModal(props) {
             nome: data.nome,
         }
 
-        if (props.editMode) {
+        if (props.editmode) {
             axios
                 .put(`https://gmed.onrender.com/pa/${props.pa.id}`, novoPA, {
-                    headers: { Authorization: `Bearer ${props.isAuth.accessToken}` },
+                    headers: { Authorization: `Bearer ${props.isauth.accessToken}` },
                 })
                 .then((data) => {
                     console.log('Princípio ativo atualizado.')
                     console.log(props.pa.id)
                     console.log(data)
-                    props.setReload((prev) => prev + 1)
-                    props.setToast({ msg: 'Princípio ativo atualizado.', show: true, title: 'Notificação' })
+                    props.setreload((prev) => prev + 1)
+                    props.settoast({ msg: 'Princípio ativo atualizado.', show: true, title: 'Notificação' })
                     props.onHide()
                 })
                 .catch((err) => {
                     setErro(err)
-                    // props.setReload((prev) => prev + 1)
+                    // props.setreload((prev) => prev + 1)
                 })
         } else {
             axios
                 .post('https://gmed.onrender.com/pa', novoPA, {
-                    headers: { Authorization: `Bearer ${props.isAuth.accessToken}` },
+                    headers: { Authorization: `Bearer ${props.isauth.accessToken}` },
                 })
                 .then((data) => {
                     console.log('Princípio ativo adicionado.')
-                    props.setToast({ msg: 'Princípio ativo adicionado.', show: true, title: 'Notificação' })
-                    props.setReload((prev) => prev + 1)
+                    props.settoast({ msg: 'Princípio ativo adicionado.', show: true, title: 'Notificação' })
+                    props.setreload((prev) => prev + 1)
                     props.onHide()
                 })
                 .catch((err) => {
                     setErro(err.response.data.errors)
-                    // props.setReload((prev) => prev + 1)
+                    // props.setreload((prev) => prev + 1)
                 })
         }
     }
@@ -63,7 +63,7 @@ function AddPAModal(props) {
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <Modal.Header closeButton>
                     <Modal.Title id='contained-modal-title-vcenter'>
-                        {props.editMode ? 'Editar' : 'Cadastrar'} princípio ativo
+                        {props.editmode ? 'Editar' : 'Cadastrar'} princípio ativo
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{ background: '#F0F0F0' }}>
@@ -87,7 +87,7 @@ function AddPAModal(props) {
                     <Button onClick={props.onHide} variant='secondary'>
                         Cancelar
                     </Button>
-                    <Button type='submit'>{props.editMode ? 'Salvar' : 'Adicionar'}</Button>
+                    <Button type='submit'>{props.editmode ? 'Salvar' : 'Adicionar'}</Button>
                 </Modal.Footer>
             </Form>
         </Modal>
