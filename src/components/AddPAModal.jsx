@@ -31,8 +31,10 @@ function AddPAModal(props) {
                 })
                 .then((data) => {
                     console.log('Princípio ativo atualizado.')
-                    props.setToast({ msg: 'Princípio ativo atualizado.', show: true, title: 'Notificação' })
+                    console.log(props.pa.id)
+                    console.log(data)
                     props.setReload((prev) => prev + 1)
+                    props.setToast({ msg: 'Princípio ativo atualizado.', show: true, title: 'Notificação' })
                     props.onHide()
                 })
                 .catch((err) => {
@@ -60,18 +62,20 @@ function AddPAModal(props) {
         <Modal {...props} size='md' aria-labelledby='contained-modal-title-vcenter' centered animation={false}>
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <Modal.Header closeButton>
-                    <Modal.Title id='contained-modal-title-vcenter'>Cadastrar princípio ativo</Modal.Title>
+                    <Modal.Title id='contained-modal-title-vcenter'>
+                        {props.editMode ? 'Editar' : 'Cadastrar'} princípio ativo
+                    </Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{ background: '#F0F0F0' }}>
                     {/* {errors.valor && <span style={{ color: 'red' }}>Digite um valor diferente de zero</span>} */}
-                    {erro &&
+                    {/* {erro &&
                         erro.map((item) => {
                             return (
                                 <p key={item} style={{ color: 'red' }}>
                                     <small variant='danger'>{item.message}</small>
                                 </p>
                             )
-                        })}
+                        })} */}
                     <Stack gap={1}>
                         <Form.Group className='mb-3'>
                             <Form.Label>Nome</Form.Label>
