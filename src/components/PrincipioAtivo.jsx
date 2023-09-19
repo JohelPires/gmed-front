@@ -41,7 +41,7 @@ function PrincipioAtivo({ pa, setPa, isAuth, reload, setReload, setToast, isSmal
     return (
         <Stack className='p-3'>
             <Stack gap={3} direction='horizontal' className='control-bar p-3 round shadow'>
-                <Button className='shadow border' variant='success' onClick={() => setPaModalShow(true)}>
+                <Button className='shadow border' variant='warning' onClick={() => setPaModalShow(true)}>
                     <FaPlus /> Princípio Ativo
                 </Button>
 

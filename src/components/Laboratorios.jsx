@@ -43,7 +43,7 @@ function Laboratorios({ labs, setLabs, isAuth, reload, setReload, setToast, isSm
     return (
         <Stack className='p-3'>
             <Stack gap={3} direction='horizontal' className='control-bar p-3 round shadow'>
-                <Button className='shadow border' variant='success' onClick={() => setLabModalShow(true)}>
+                <Button className='shadow border' variant='warning' onClick={() => setLabModalShow(true)}>
                     <FaPlus /> Laboratório
                 </Button>
 

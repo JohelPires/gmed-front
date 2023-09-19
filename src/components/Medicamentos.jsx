@@ -88,7 +88,7 @@ function Medicamentos({ ct, labs, pa, isAuth, reload, setReload, setMeds, meds, 
         <Stack className='p-3'>
             <Stack gap={3} className='control-bar p-3 round shadow'>
                 <Stack gap={3} direction='horizontal'>
-                    <Button className='shadow border' variant='success' onClick={() => setModalShow(true)}>
+                    <Button className='shadow border' variant='warning' onClick={() => setModalShow(true)}>
                         <FaPlus /> Medicamento
                     </Button>
 
