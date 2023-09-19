@@ -3,35 +3,41 @@ import React, { useState } from 'react'
 import { Button, ButtonGroup, Stack } from 'react-bootstrap'
 import AddLabModal from './AddLabModal'
 import { FaEdit, FaTrashAlt } from 'react-icons/fa'
+import DeleteModal from './DeleteModal'
 
 function Lab({ item, isAuth, setReload, setToast, isSmallScreen }) {
     const [updateModalShow, setUpdateModalShow] = useState(false)
+    const [deleteShow, setDeleteShow] = useState(false)
 
     function handleDelete() {
-        if (window.confirm('Tem certeza que quer deletar esse laboratório?')) {
-            axios
-                .delete(`https://gmed.onrender.com/laboratorios/${item.id}`, {
-                    headers: { Authorization: `Bearer ${isAuth.accessToken}` },
-                })
-                .then((data) => {
-                    console.log(data)
-                    setToast({ msg: 'Laboratório excluído.', show: true, title: 'Notificação' })
-                    setReload((prev) => prev + 1)
-                    // props.onHide()
-                })
-                .catch((err) => {
-                    console.log(err)
-                    if (err.response.data.name === 'SequelizeForeignKeyConstraintError') {
-                        console.log(
-                            'Atenção: Não é possível deletar um laboratório se houver um medicamento desse laboratório cadastrado.'
-                        )
-                        window.alert(
-                            'Atenção: Não é possível deletar um laboratório se houver um medicamento desse laboratório cadastrado.'
-                        )
-                    }
-                })
-        }
+        setDeleteShow(true)
     }
+
+    // function handleDelete() {
+    //     if (window.confirm('Tem certeza que quer deletar esse laboratório?')) {
+    //         axios
+    //             .delete(`https://gmed.onrender.com/laboratorios/${item.id}`, {
+    //                 headers: { Authorization: `Bearer ${isAuth.accessToken}` },
+    //             })
+    //             .then((data) => {
+    //                 console.log(data)
+    //                 setToast({ msg: 'Laboratório excluído.', show: true, title: 'Notificação' })
+    //                 setReload((prev) => prev + 1)
+    //                 // props.onHide()
+    //             })
+    //             .catch((err) => {
+    //                 console.log(err)
+    //                 if (err.response.data.name === 'SequelizeForeignKeyConstraintError') {
+    //                     console.log(
+    //                         'Atenção: Não é possível deletar um laboratório se houver um medicamento desse laboratório cadastrado.'
+    //                     )
+    //                     window.alert(
+    //                         'Atenção: Não é possível deletar um laboratório se houver um medicamento desse laboratório cadastrado.'
+    //                     )
+    //                 }
+    //             })
+    //     }
+    // }
     return (
         <Stack gap={3} className='border-bottom pb-2' direction='horizontal'>
             <Stack>
@@ -57,6 +63,16 @@ function Lab({ item, isAuth, setReload, setToast, isSmallScreen }) {
                 onHide={() => setUpdateModalShow(false)}
             />
             {/* <ViewModal med={item} show={viewModalShow} onHide={() => setViewModalShow(false)} /> */}
+
+            <DeleteModal
+                show={deleteShow}
+                setShow={setDeleteShow}
+                item={item}
+                isAuth={isAuth}
+                setToast={setToast}
+                setReload={setReload}
+                what={'laboratorios'}
+            />
         </Stack>
     )
 }

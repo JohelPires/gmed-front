@@ -4,25 +4,15 @@ import ViewModal from './ViewModal'
 import UpdateModal from './UpdateModal'
 import axios from 'axios'
 import { FaEdit, FaEye, FaTrashAlt } from 'react-icons/fa'
+import DeleteModal from './DeleteModal'
 
 function Med({ item, ct, labs, pa, isAuth, setReload, setToast, isSmallScreen }) {
     const [viewModalShow, setViewModalShow] = useState(false)
     const [updateModalShow, setUpdateModalShow] = useState(false)
+    const [deleteShow, setDeleteShow] = useState(false)
 
     function handleDelete() {
-        if (window.confirm('Tem certeza que quer deletar esse medicamento?')) {
-            axios
-                .delete(`https://gmed.onrender.com/medicamentos/${item.id}`, {
-                    headers: { Authorization: `Bearer ${isAuth.accessToken}` },
-                })
-                .then((data) => {
-                    console.log(data)
-                    setToast({ msg: 'Medicamento excluído.', show: true, title: 'Notificação' })
-                    setReload((prev) => prev + 1)
-                    // props.onHide()
-                })
-                .catch((err) => console.log(err))
-        }
+        setDeleteShow(true)
     }
 
     return (
@@ -66,6 +56,16 @@ function Med({ item, ct, labs, pa, isAuth, setReload, setToast, isSmallScreen })
                 setToast={setToast}
             />
             <ViewModal med={item} show={viewModalShow} onHide={() => setViewModalShow(false)} />
+
+            <DeleteModal
+                show={deleteShow}
+                setShow={setDeleteShow}
+                item={item}
+                isAuth={isAuth}
+                setToast={setToast}
+                setReload={setReload}
+                what={'medicamentos'}
+            />
         </Stack>
     )
 }
