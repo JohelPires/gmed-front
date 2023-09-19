@@ -40,9 +40,9 @@ function PrincipioAtivo({ pa, setPa, isAuth, reload, setReload, setToast, isSmal
 
     return (
         <Stack className='p-3'>
-            <Stack gap={3} direction='horizontal' className='control-bar p-3 round'>
-                <Button variant='light' onClick={() => setPaModalShow(true)}>
-                    Cadastrar Princípio Ativo
+            <Stack gap={3} direction='horizontal' className='control-bar p-3 round shadow'>
+                <Button className='shadow border' variant='success' onClick={() => setPaModalShow(true)}>
+                    <FaPlus /> Princípio Ativo
                 </Button>
 
                 <Form.Control

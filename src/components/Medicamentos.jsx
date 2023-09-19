@@ -86,10 +86,10 @@ function Medicamentos({ ct, labs, pa, isAuth, reload, setReload, setMeds, meds, 
 
     return (
         <Stack className='p-3'>
-            <Stack gap={3} className='control-bar p-3 round'>
+            <Stack gap={3} className='control-bar p-3 round shadow'>
                 <Stack gap={3} direction='horizontal'>
-                    <Button variant='light' onClick={() => setModalShow(true)}>
-                        Cadastrar medicamento
+                    <Button className='shadow border' variant='success' onClick={() => setModalShow(true)}>
+                        <FaPlus /> Medicamento
                     </Button>
 
                     <Form.Control
