@@ -16,7 +16,7 @@ function Med({ item, ct, labs, pa, isAuth, setReload, setToast, isSmallScreen })
     }
 
     return (
-        <Stack key={item.id} gap={3} className='border-bottom pb-2' direction='horizontal'>
+        <Stack key={item.id} gap={3} className='border-bottom pb-1 mb-1' direction='horizontal'>
             <h6 className='w-25' style={{ cursor: 'pointer' }} onClick={() => setViewModalShow(true)}>
                 {item.nome}
             </h6>
