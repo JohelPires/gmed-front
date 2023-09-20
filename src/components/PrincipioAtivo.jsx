@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PA from './PA'
 import AddPAModal from './AddPAModal'
-import { Button, Form, Spinner, Stack } from 'react-bootstrap'
+import { Button, Form, Pagination, Spinner, Stack } from 'react-bootstrap'
 import axios from 'axios'
 import { FaPlus } from 'react-icons/fa'
 
@@ -12,13 +12,25 @@ function PrincipioAtivo({ pa, setPa, isAuth, reload, setReload, setToast, isSmal
     const [dadoFiltrado, setDadoFiltrado] = useState([])
     const [procurar, setProcurar] = useState('')
 
+    const [currentPage, setCurrentPage] = useState(1)
+    const itemsPerPage = 50 // Adjust this to change how many items to display per page
+
+    let indexOfLastItem = currentPage * itemsPerPage
+    let indexOfFirstItem = indexOfLastItem - itemsPerPage
+
+    useEffect(() => {
+        indexOfLastItem = currentPage * itemsPerPage
+        indexOfFirstItem = indexOfLastItem - itemsPerPage
+        setDadoFiltrado(pa.slice(indexOfFirstItem, indexOfLastItem))
+    }, [currentPage])
+
     useEffect(() => {
         setLoading(true)
         axios
             .get('https://gmed.onrender.com/pa', { headers: { Authorization: `Bearer ${isAuth.accessToken}` } })
             .then((data) => {
                 setPa(data.data)
-                setDadoFiltrado(data.data)
+                setDadoFiltrado(data.data.slice(indexOfFirstItem, indexOfLastItem))
                 setLoading(false)
                 setMsg('Sem dados.')
             })
@@ -37,6 +49,10 @@ function PrincipioAtivo({ pa, setPa, isAuth, reload, setReload, setToast, isSmal
         procurar &&
             setDadoFiltrado((prev) => prev.filter((item) => item.nome.toLowerCase().startsWith(procurar.toLowerCase())))
     }, [procurar])
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber)
+    }
 
     return (
         <Stack className='p-3'>
@@ -83,6 +99,23 @@ function PrincipioAtivo({ pa, setPa, isAuth, reload, setReload, setToast, isSmal
             ) : (
                 <p>{msg}</p>
             )}
+
+            <Pagination className='mt-2'>
+                <Pagination.Prev onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} />
+                {[...Array(Math.ceil(pa.length / itemsPerPage)).keys()].map((number) => (
+                    <Pagination.Item
+                        key={number}
+                        active={number + 1 === currentPage}
+                        onClick={() => handlePageChange(number + 1)}
+                    >
+                        {number + 1}
+                    </Pagination.Item>
+                ))}
+                <Pagination.Next
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === Math.ceil(pa.length / itemsPerPage)}
+                />
+            </Pagination>
 
             <AddPAModal
                 editMode={false}
