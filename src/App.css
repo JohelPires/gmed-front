@@ -26,13 +26,18 @@
     color: white;
 }
 
+.main-blue {
+    background: #307591;
+}
+
 .navbar {
     /* display: flex; */
     /* width: 100vw; */
     /* padding-bottom: 50px; */
     height: 90px;
-    background: #46a0a0;
-    background: linear-gradient(225deg, #46a0a0 0%, #46cccc 100%);
+    /* background: #46a0a0; */
+    background: #307591;
+    /* background: linear-gradient(225deg, #307591 0%, #2d5666 100%); */
 }
 
 .transaction-input {
@@ -75,6 +80,7 @@ h3 {
 
 .control-bar {
     background: #5bc6c6;
+    background: #307591;
     /* background: linear-gradient(135deg, rgba(4, 64, 98, 1) 0%, rgba(1, 40, 62, 1) 100%); */
 }
 

@@ -31,6 +31,7 @@ function Navbar({ isAuth, setIsAuth, isSmallScreen }) {
                             <h6 className='mt-1'>Sobre</h6>
                         </Link>
                         <DropdownButton
+                            className='shadow'
                             as={ButtonGroup}
                             size='sm'
                             variant='success'

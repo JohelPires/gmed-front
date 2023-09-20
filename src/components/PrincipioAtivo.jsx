@@ -41,16 +41,18 @@ function PrincipioAtivo({ pa, setPa, isAuth, reload, setReload, setToast, isSmal
     }, [reload])
 
     useEffect(() => {
-        setDadoFiltrado(pa)
+        procurar && setDadoFiltrado(pa)
         // console.log(filtroPorLab)
         // filtroPorLab > 0 && setDadoFiltrado((prev) => prev.filter((item) => item.id_laboratorio == filtroPorLab))
         // filtroPorPa > 0 && setDadoFiltrado((prev) => prev.filter((item) => item.id_principio_ativo == filtroPorPa))
         // filtroPorCt > 0 && setDadoFiltrado((prev) => prev.filter((item) => item.id_classe_terapeutica == filtroPorCt))
         procurar &&
             setDadoFiltrado((prev) => prev.filter((item) => item.nome.toLowerCase().startsWith(procurar.toLowerCase())))
+        setCurrentPage(1)
     }, [procurar])
 
     const handlePageChange = (pageNumber) => {
+        setProcurar('')
         setCurrentPage(pageNumber)
     }
 
@@ -100,22 +102,24 @@ function PrincipioAtivo({ pa, setPa, isAuth, reload, setReload, setToast, isSmal
                 <p>{msg}</p>
             )}
 
-            <Pagination className='mt-2'>
-                <Pagination.Prev onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} />
-                {[...Array(Math.ceil(pa.length / itemsPerPage)).keys()].map((number) => (
-                    <Pagination.Item
-                        key={number}
-                        active={number + 1 === currentPage}
-                        onClick={() => handlePageChange(number + 1)}
-                    >
-                        {number + 1}
-                    </Pagination.Item>
-                ))}
-                <Pagination.Next
-                    onClick={() => handlePageChange(currentPage + 1)}
-                    disabled={currentPage === Math.ceil(pa.length / itemsPerPage)}
-                />
-            </Pagination>
+            {!procurar && (
+                <Pagination className='mt-3'>
+                    <Pagination.Prev onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} />
+                    {[...Array(Math.ceil(pa.length / itemsPerPage)).keys()].map((number) => (
+                        <Pagination.Item
+                            key={number}
+                            active={number + 1 === currentPage}
+                            onClick={() => handlePageChange(number + 1)}
+                        >
+                            {number + 1}
+                        </Pagination.Item>
+                    ))}
+                    <Pagination.Next
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage === Math.ceil(pa.length / itemsPerPage)}
+                    />
+                </Pagination>
+            )}
 
             <AddPAModal
                 editMode={false}
