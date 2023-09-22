@@ -25,13 +25,24 @@ function UpdateModal(props) {
 
     function onSubmit(data) {
         // e.preventDefault()
+
+        if (data.id_laboratorio === 'Selecione...') {
+            window.alert('Informe o laboratório')
+        }
+        if (data.id_principio_ativo === 'Selecione...') {
+            window.alert('Informe o principio ativo')
+        }
+        if (data.id_classe_terapeutica === 'Selecione...') {
+            window.alert('Informe a classe terapeutica')
+        }
+
         const novoMedicamento = {
             nome: data.nome,
             registro: data.registro,
             id_laboratorio: parseInt(data.id_laboratorio),
             id_principio_ativo: parseInt(data.id_principio_ativo),
             id_classe_terapeutica: parseInt(data.id_classe_terapeutica),
-            apresentacao: data.apresentacao,
+            apresentacao: data.apresentacao ? data.apresentacao : ' ',
             quantidade: data.quantidade,
             vencimento: data.vencimento,
         }
@@ -146,10 +157,11 @@ function UpdateModal(props) {
                         <Form.Group className='mb-3 w-75'>
                             <Form.Label>Apresentação</Form.Label>
                             <Form.Control
+                                // required={false}
                                 as='textarea'
                                 rows={4}
-                                aria-label='Default select example'
-                                {...register('apresentacao', { required: true })}
+                                // aria-label='Default select example'
+                                {...register('apresentacao', { required: false })}
                             ></Form.Control>
                         </Form.Group>
                         <Stack>

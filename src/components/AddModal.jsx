@@ -22,6 +22,15 @@ function AddModal(props) {
 
     function onSubmit(data) {
         // e.preventDefault()
+        if (data.id_laboratorio === 'Selecione...') {
+            window.alert('Informe o laboratório')
+        }
+        if (data.id_principio_ativo === 'Selecione...') {
+            window.alert('Informe o principio ativo')
+        }
+        if (data.id_classe_terapeutica === 'Selecione...') {
+            window.alert('Informe a classe terapeutica')
+        }
         const novoMedicamento = {
             nome: data.nome,
             registro: data.registro,
@@ -74,7 +83,9 @@ function AddModal(props) {
                         erro.map((item) => {
                             return (
                                 <p key={item} style={{ color: 'red' }}>
-                                    <small variant='danger'>{item}</small>
+                                    <small variant='danger'>
+                                        {item == 'registro must be unique' && 'Registro existente. Tente outro.'}
+                                    </small>
                                 </p>
                             )
                         })}
@@ -97,6 +108,7 @@ function AddModal(props) {
                         <Form.Group className='mb-3 w-50'>
                             <Form.Label>Laboratório</Form.Label>
                             <Form.Select
+                                required
                                 defaultValue={0}
                                 aria-label='Default select example'
                                 {...register('id_laboratorio', { required: true })}
@@ -115,6 +127,7 @@ function AddModal(props) {
                         <Form.Group className='mb-3 w-50'>
                             <Form.Label>Principio Ativo</Form.Label>
                             <Form.Select
+                                required
                                 aria-label='Default select example'
                                 {...register('id_principio_ativo', { required: true })}
                             >
